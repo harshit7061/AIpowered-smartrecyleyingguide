@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-powered Smart Recycling Guide">
+    <title>AI-powered Smart Recycling Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #27ae60;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+
+        section {
+            margin: 30px auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .image-upload h2, .recycle-items h2 {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-upload input {
+            display: block;
+            margin: 0 auto;
+            padding: 10px;
+            border: 2px solid #27ae60;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #aiResult {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.3rem;
+            color: #27ae60;
+        }
+
+        .items-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .item {
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px;
+            width: 220px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out, background-color 0.3s;
+        }
+
+        .item img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .item p {
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+
+        .item:hover {
+            background-color: #27ae60;
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .result {
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            background-color: #ecf9f1;
+            margin: 30px 0;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .items-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .item {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>AI-powered Smart Recycling Guide</h1>
+    <p>Using AI to help you recycle efficiently and responsibly.</p>
+</header>
+
+<section class="image-upload">
+    <h2>Upload Waste Image for AI Analysis</h2>
+    <input type="file" id="imageInput" onchange="uploadImage()" />
+    <p id="aiResult">AI analysis result will appear here after image upload.</p>
+</section>
+
+<section class="recycle-items">
+    <h2>Check Recyclability of Popular Items</h2>
+    <div class="items-grid">
+        <div class="item" onclick="checkRecyclable('Plastic')">
+            <img src="imagesplastic.jpeg" alt="Plastic" />
+            <p>Plastic</p>
+        </div>
+        <div class="item" onclick="checkRecyclable('Electronics')">
+            <img src="Electronic.jpg" alt="Electronics" />
+            <p>Electronics</p>
+        </div>
+        <div class="item" onclick="checkRecyclable('Paper')">
+            <img src="better-valuations-of-paper-companies-just-a-matter-of-time.jpg" alt="Paper" />
+            <p>Paper</p>
+        </div>
+        <div class="item" onclick="checkRecyclable('Glass')">
+            <img src="imagesglass.jpeg" alt="Glass" />
+            <p>Glass</p>
+        </div>
+    </div>
+
+
+<section id="result" class="result">
+    <h3 id="resultText">Select an item to see if it's recyclable and learn more about it.</h3>
+</section></section>
+
+<footer>
+    <p>© 2024 AI-powered Smart Recycling Guide | Powered by AI and Waste Management Solutions</p>
+</footer>
+
+<script>
+    // Simulated AI image analysis for file upload
+    function uploadImage() {
+        const fileInput = document.getElementById("imageInput");
+        const file = fileInput.files[0];
+        if (file) {
+            // Simulate AI analysis
+            document.getElementById("aiResult").textContent = "AI detected this as recyclable: Yes, this item can be recycled!";
+        } else {
+            document.getElementById("aiResult").textContent = "Please upload an image for AI analysis.";
+        }
+    }
+
+    // Function to check if selected item is recyclable
+    function checkRecyclable(item) {
+        const recyclableItems = {
+            "Plastic": {
+                description: "Plastic is one of the most common materials found in waste and can often be recycled. "
+                            + "However, not all types of plastic are recyclable. Items such as plastic bottles, containers, "
+                            + "and packaging materials can usually be recycled if they are clean and free of food residue. "
+                            + "It's important to note that certain plastics, such as plastic bags, cannot be recycled through "
+                            + "standard curbside programs and require special drop-off locations. "
+                            + "Recycling plastic helps reduce the demand for new plastic production, conserves resources, "
+                            + "and minimizes environmental pollution. Always check the plastic recycling code on the item before disposing of it. "
+                            + "Remember to clean and dry the plastic items before recycling them to prevent contamination. "
+                            + "Recycling plastic effectively can greatly contribute to reducing landfill waste and environmental damage.",
+                index: 7
+            },
+            "Electronics": {
+                description: "Electronics, also known as e-waste, contain valuable materials that can be recycled, including metals, "
+                            + "plastics, and even precious metals like gold. However, improper disposal of electronics can lead to harmful chemicals "
+                            + "entering the environment, such as lead, mercury, and cadmium. To recycle electronics, it's important to take them to a designated "
+                            + "e-waste recycling facility, where they will be safely disassembled and processed. Many cities offer drop-off points for electronics recycling, "
+                            + "and some electronics stores also provide take-back programs for old devices. "
+                            + "Commonly recyclable electronics include old computers, mobile phones, TVs, and other household gadgets. "
+                            + "By recycling electronics, we not only recover valuable materials but also reduce the environmental harm caused by electronic waste. "
+                            + "Always erase personal data from devices before recycling to ensure your privacy is protected.",
+                index: 5
+            },
+            "Paper": {
+                description: "Paper is one of the easiest materials to recycle, and it is accepted by most curbside recycling programs. "
+                            + "Items such as newspapers, magazines, office paper, and cardboard can typically be recycled if they are clean and dry. "
+                            + "However, wet or soiled paper, such as used napkins or food-soiled paper products, cannot be recycled. "
+                            + "Recycling paper helps save trees, reduce water and energy consumption, and decrease the need for landfill space. "
+                            + "It's important to flatten cardboard boxes to save space in the recycling bin. "
+                            + "Shredded paper can also be recycled but may need to be placed in a separate bag or taken to a designated drop-off point. "
+                            + "Recycling paper helps in reducing the carbon footprint and contributes to a sustainable environment. "
+                            + "Many recycled paper products, such as paper towels and tissues, are available on the market, further promoting the recycling loop.",
+                index: 9
+            },
+            "Glass": {
+                description: "Glass is a highly recyclable material that can be recycled endlessly without losing its quality or purity. "
+                            + "Common glass items that can be recycled include bottles, jars, and containers. "
+                            + "However, certain types of glass, such as window glass, mirrors, or light bulbs, may require special disposal and should not be placed in curbside recycling bins. "
+                            + "To recycle glass, ensure it is clean and free of food residue. Many communities have specific glass recycling drop-off points or accept glass through curbside programs. "
+                            + "Recycling glass conserves raw materials, reduces energy usage in the production of new glass, and minimizes landfill waste. "
+                            + "Broken glass can be dangerous, so handle it with care and check if your local recycling program accepts it. "
+                            + "By recycling glass, we significantly reduce the environmental impact associated with the extraction of raw materials. "
+                            + "In some areas, glass is collected separately by color (clear, green, brown) to ensure the highest quality recycling process.",
+                index: 8
+            }
+        };
+
+        const resultText = document.getElementById('resultText');
+        const itemInfo = recyclableItems[item];
+
+        if (itemInfo) {
+            resultText.textContent = `Is ${item} recyclable? ${itemInfo.description} Recycling Index: ${itemInfo.index}/10.`;
+        } else {
+            resultText.textContent = `No information available for ${item}.`;
+        }
+    }
+</script>
+
+
+</body>
+</html>
